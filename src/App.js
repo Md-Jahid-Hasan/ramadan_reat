@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Select from 'react-select'
 import times from './time'
 import districts from './district'
+import Prayer from "./prayer";
 
 let options = [];
 let test = null;
@@ -13,14 +14,17 @@ function App() {
     const [sehri, setSehri] = useState();
     let i;
     let [month, date, year] = new Date().toLocaleDateString("en-US").split("/")
-    let [hour, minute, second] = new Date().toLocaleTimeString("en-US").split(/:| /)
+    let today = new Date();
+    let hour = today.getHours();
+    
     if (hour > 19) {
         date += 1;
     }
-    let nowDate = year + "-" + ('0' + month).slice(-2) + "-" + date;
+    let nowDate = year + "-" + ('0' + month).slice(-2) + "-" + ('0' + date).slice(-2);
 
 
     const sehri_district_time = [
+        {time: 0, area: ["Dhaka"]},
         {time: 1, area: ["Manikganj", "Bogura", "Sirajganj", "Panchagarh", "Nilphamari"]},
         {
             time: 2,
@@ -44,6 +48,7 @@ function App() {
     ]
 
     const iftar_dis_time = [
+        {time: 0, area: ["Dhaka"]},
         {time: 1, area: ["Gopalganj", "Mymensingh", "Bagherhat"]},
         {time: 2, area: ["Narail", "Faridpur", "Khulna", "Manikganj", "Tangail"]},
         {time: 3, area: ["Magura", "Sherpur"]},
@@ -93,7 +98,6 @@ function App() {
                 for (b in iftar_dis_time[a].area) {
                     console.log(iftar_dis_time[a].area[b], dis)
                     if (dis === iftar_dis_time[a].area[b]) {
-                        //('0' + (schedule.iftar_min + iftar_dis_time[a].time)).slice(-2)
                         let x = schedule.iftar_min + iftar_dis_time[a].time;
                         let y = schedule.iftar_h;
                         if(x < 0){
@@ -113,6 +117,10 @@ function App() {
                         if(x < 0){
                             y -=1;
                             x = 60 +x;
+                        }
+                        else if (x > 59){
+                            y += 1;
+                            x = x - 60;
                         }
                         setSehri(y + " : " + ('0' + x).slice(-2));
                     }
@@ -158,6 +166,7 @@ function App() {
                 </tr>
                 </tbody>
             </table>}
+            <Prayer />
         </div>
 
     )
