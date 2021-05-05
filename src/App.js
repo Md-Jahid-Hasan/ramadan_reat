@@ -16,10 +16,12 @@ function App() {
     let [month, date, year] = new Date().toLocaleDateString("en-US").split("/")
     let today = new Date();
     let hour = today.getHours();
-    
+    date = Number(date)
+
     if (hour > 19) {
         date += 1;
     }
+
     let nowDate = year + "-" + ('0' + month).slice(-2) + "-" + ('0' + date).slice(-2);
 
 
@@ -96,7 +98,7 @@ function App() {
         if (dis !== null) {
             for (a in iftar_dis_time) {
                 for (b in iftar_dis_time[a].area) {
-                    console.log(iftar_dis_time[a].area[b], dis)
+
                     if (dis === iftar_dis_time[a].area[b]) {
                         let x = schedule.iftar_min + iftar_dis_time[a].time;
                         let y = schedule.iftar_h;
