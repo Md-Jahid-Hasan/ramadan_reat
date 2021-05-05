@@ -12,7 +12,7 @@ function Prayer(){
     }, [])
 
     const hadith = async ()=>{
-        let url = 'http://bn-hadith-api.herokuapp.com/hadiths/' + Math.floor(Math.random() * 63);
+        let url = 'https://bn-hadith-api.herokuapp.com/hadiths/' + Math.floor(Math.random() * 63);
         let fetchAPI = fetch(url);
         let response = await fetchAPI;
         let data = await response.json();
