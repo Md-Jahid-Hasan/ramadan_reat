@@ -40,7 +40,7 @@ function Prayer(){
     }, [])
 
     return (
-        <div className={"position-sticky bottom-0 start-50"}>
+        <div className={"position-static bottom-0 start-50"}>
             {message.map((i, index) =>
             <div key={index} className={"alert alert-primary text-center"}>{i}</div>)}
 
